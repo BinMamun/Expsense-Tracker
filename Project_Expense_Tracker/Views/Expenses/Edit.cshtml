@@ -1,0 +1,84 @@
+﻿@model Expense
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="text-center">
+    <h2>Edit Expense</h2>
+    <hr />
+</div>
+
+<div class="row ">
+    <div class="col-12 offset-3">
+        <form method="post" asp-action="Edit" asp-controller="Expenses" asp-route-Id="@Model.Id">
+            <div class="row from-group mb-2">
+                <label asp-for="ExpenseDescription" class="col-form-label col-2"></label>
+                <div class="col-3">
+                    <input type="text" asp-for="ExpenseDescription" class="form-control" />
+                </div>
+                <span asp-validation-for="ExpenseDescription" class="text-danger col-3"></span>
+            </div>
+
+            <div class="row from-group mb-2">
+                <label asp-for="DateOfExpense" class=" col-form-label col-2"></label>
+                <div class="col-3">
+                    <input type="text" asp-for="DateOfExpense" class="form-control" />
+                </div>
+                <span asp-validation-for="DateOfExpense" class="text-danger col-3"></span>
+            </div>
+
+            <div class="row form-group mb-2">
+                <label asp-for="ExpenseCategoryId" class="col-form-label col-2"></label>
+                <div class="col-3">
+                    <select asp-for="ExpenseCategoryId" class="form-select" asp-items="@(new SelectList(ViewBag.Categories, "Id", "Category"))">
+                        <option selected>----Select----</option>
+                    </select>
+                </div>
+                <span asp-validation-for="ExpenseCategoryId" class="text-danger col-3"></span>
+            </div>
+
+
+            <div class="row from-group mb-2">
+                <label asp-for="Amount" class=" col-form-label col-2"></label>
+                <div class="col-3">
+                    <input type="text" asp-for="Amount" class="form-control" />
+                </div>
+                <span asp-validation-for="Amount" class="text-danger col-3"></span>
+            </div>
+
+
+            <div class="row from-group offset-2 mt-3">
+                <button type="submit" class="btn btn-success col-1">Update</button>                
+                
+            </div>
+        </form>
+    </div>
+
+    <div class="row">
+        <div class="col-1">
+            <a asp-action="Index" asp-controller="Expenses">Back</a>
+        </div>
+    </div>
+</div>
+
+@section styles{
+    <link href="~/libs/icon/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="~/libs/datepicker/css/bootstrap-datepicker.standalone.css" rel="stylesheet" />
+}
+
+@section scripts {
+
+    <script src="~/libs/jquery/jquery.js"></script>
+    <script src="~/libs/jquery/jquery.validate.js"></script>
+    <script src="~/libs/jquery/unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/libs/datepicker/js/bootstrap-datepicker.js"></script>
+
+    <script>
+        $(() => {
+            $("#DateOfExpense").datepicker({
+                format: 'yyyy-mm-dd'
+            });
+        })
+    </script>
+}
+

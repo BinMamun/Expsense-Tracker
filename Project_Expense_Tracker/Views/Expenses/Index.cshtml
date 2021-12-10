@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Expense>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="text-center">
+    <h2>Expenses</h2>
+    <hr />
+</div>
+
+
+<div class="row mb-2">
+    <div class="col-6">
+        <form asp-controller="Expenses" asp-action="index">
+            <div class="d-flex justify-content-start">
+                <label class="px-2">From</label>
+                <input style="width:200px" name="from" id="from" class="form-control form-control-sm" />
+                <label class="px-2">To</label>
+                <input style="width:200px" name="to" id="to" class="form-control form-control-sm" />
+                <button type="submit" class="btn btn-success btn-sm mx-2">View</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-6">
+        <div class="d-flex justify-content-end">
+            <a title="Add Expenses" class="btn btn-outline-success" asp-controller="Expenses" asp-action="Create"><i class="bi bi-plus-lg"></i></a>
+        </div>
+    </div>
+</div>
+
+<div class="row d-flex justify-content-center">
+
+    <div class="col-12">
+        <table class="table table-hover">
+            <thead class="table-success">
+                <tr class="text-center">
+                    <th>@Html.DisplayNameFor(x => x.ExpenseDescription)</th>
+                    <th>@Html.DisplayNameFor(x => x.DateOfExpense)</th>
+                    <th>@Html.DisplayNameFor(x => x.ExpenseCategoryId)</th>
+                    <th>@Html.DisplayNameFor(x => x.Amount)</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody class="table-active ">
+                @foreach (var d in Model)
+                {
+                    <tr class="align-middle text-center">
+
+                        <td>@d.ExpenseDescription</td>
+                        <td>@d.DateOfExpense.ToString("MMM dd,yyyy")</td>
+                        <td>@d.ExpenseCategory.Category</td>
+                        <td>@d.Amount.ToString("0.00")</td>
+                        <td>
+                            <a title="Edit" class="btn btn-outline-dark" asp-controller="Expenses" asp-action="Edit" asp-route-id="@d.Id"><i class="bi bi-pencil"></i></a>
+                            <a title="Delete" class="btn btn-outline-danger" asp-controller="Expenses" asp-action="Delete" asp-route-id="@d.Id"><i class="bi bi-trash"></i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section styles{
+    <link href="~/libs/icon/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="~/libs/datepicker/css/bootstrap-datepicker.standalone.css" rel="stylesheet" />
+}
+
+@section scripts {
+
+    <script src="~/libs/jquery/jquery.js"></script>
+    <script src="~/libs/jquery/jquery.validate.js"></script>
+    <script src="~/libs/jquery/unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/libs/datepicker/js/bootstrap-datepicker.js"></script>
+
+    <script>
+        $(() => {
+            $("#from").datepicker({
+                format: 'yyyy-mm-dd'
+            });
+            $("#to").datepicker({
+                format: 'yyyy-mm-dd'
+            });
+        })
+    </script>
+}

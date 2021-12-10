@@ -1,0 +1,45 @@
+﻿@model ExpenseCategory
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="text-center">
+    <h2>Delete Category</h2>
+    <hr />
+</div>
+
+<div class="row ">
+
+    <div class="col-12 offset-3">
+
+        <form method="post" asp-action="Delete" asp-controller="Categories" asp-route-Id="@Model.Id">
+
+            <div class="row form-group mb-2">
+                <label asp-for="Category" class="col-form-label col-2"></label>
+                <div class="col-3">
+                    <input asp-for="Category" class="form-control" readonly />
+                </div>
+            </div>
+
+
+         
+            <div class="row form-group mb-2">
+                <div class="col-1 offset-2">
+                    <button type="submit" class="btn btn-outline-danger">Delete</button>
+                </div>
+            </div>
+        </form>
+
+
+    </div>
+    <div>
+        <a asp-action="Index" asp-controller="Categories">Back</a>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/libs/jquery/jquery.js"></script>
+    <script src="~/libs/jquery/jquery.validate.js"></script>
+    <script src="~/libs/jquery/jquery.validate.unobtrusive.js"></script>
+}
+
